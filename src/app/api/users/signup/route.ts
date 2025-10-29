@@ -3,6 +3,7 @@ import {connectToDatabase} from "@/dbConfig/dbConfig";
 import User from  "@/models/userModel";
 import { NextResponse,NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
+import { sendEmail } from "@/helpers/mailer";
 
 
 connectToDatabase();
@@ -39,6 +40,13 @@ export async function POST(request: NextRequest) {
       if(!savedUser){
         return NextResponse.json({error:"Failed to save user"},{status:500});
       }
+
+
+      // send em`ail verification link here
+
+      await sendEmail({email,emailType:"VERIFY",userId:savedUser._id});
+
+
         return NextResponse.json({message:"User registered successfully",success:true,savedUser},{status:201});
 
 
