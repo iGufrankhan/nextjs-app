@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "User not found." }, { status: 404 });
     }
 
-    // ✅ Send the password reset email
+   
     await sendEmail({
       email,
       emailType: "RESET",
@@ -30,6 +30,8 @@ export async function POST(request: NextRequest) {
       { message: "Password reset email sent successfully!" },
       { status: 200 }
     );
+
+    
   } catch (error: any) {
     console.error("Error in forgot password route:", error);
     return NextResponse.json(

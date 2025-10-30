@@ -16,7 +16,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ✅ Find user with matching reset token
     const user = await User.findOne({
       forgetpasswordToken: token,
       forgetpasswordTokenExpiry: { $gt: Date.now() },
@@ -29,8 +28,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // ✅ Hash new password and update
     const hashedPassword = await bcrypt.hash(password, 10);
+
     user.password = hashedPassword;
     user.forgetpasswordToken = undefined;
     user.forgetpasswordTokenExpiry = undefined;
@@ -40,6 +39,8 @@ export async function POST(request: NextRequest) {
       { message: "Password reset successfully!" },
       { status: 200 }
     );
+
+    
   } catch (error: any) {
     console.error("Reset password error:", error);
     return NextResponse.json(

@@ -150,7 +150,7 @@ export default function SignupPage() {
         transition={{ delay: 1 }}
         className="absolute bottom-4 text-xs text-gray-500"
       >
-        © {new Date().getFullYear()} | Made with ❤️ using Next.js
+        © {new Date().getFullYear()} | DESIGNED BY GUFRAN KHAN
       </motion.p>
     </div>
   );
